@@ -1,0 +1,121 @@
+### Sod's shock tube ###
+# Please put your runtime parameters: 
+# name, and a space, followed by values 
+
+# sim variables
+sim_name 'sod128_plm_mm_roe2' # 'sod128_plm_mc_roe2'
+sim_cfl 0.8 
+sim_tmax 0.15 # 0.15 # 0.2
+sim_nStep 100000
+sim_riemann 'roe' #roe #hll
+sim_limiter 'minmod' #mc #vanLeer #minmod
+sim_charLimiting .false.
+sim_order 2
+
+# grid variables
+gr_nx 128
+gr_ngc 2
+gr_xbeg 0.0
+gr_xend 1.0
+
+# problem specific physical IC
+sim_shockLoc 0.5
+sim_densL 1.0
+sim_velxL -2.0 #0.#-2.
+sim_presL 0.4 #1.0 #0.4
+sim_densR 1.0 #0.125 #1.0
+sim_velxR 2.0 #0. #2.0
+sim_presR 0.4 #0.1 #0.4
+sim_gamma 1.4
+sim_smallPres 1.e-12
+
+# BC type
+sim_bcType 'outflow'
+
+# IO frequency
+sim_ioTfreq 0.01 #real
+sim_ioNfreq 10    #positive integer; zero or negative if not used
+
+### Blast2 (need to change variables in a few files) ###
+# Please put your runtime parameters: 
+# name, and a space, followed by values 
+
+# sim variables blas2
+sim_name 'sod128_ppm_mc_3_hllc' # 'sod128_plm_mc_roe2'
+sim_cfl 0.8 
+sim_tmax 0.038 # 0.15 # 0.2
+sim_nStep 100000
+sim_riemann 'hllc' #roe #hll
+sim_limiter 'mc' #mc #vanLeer #minmod
+sim_charLimiting .false.
+sim_order 3
+
+# grid variables
+gr_nx 128
+gr_ngc 2
+gr_xbeg 0.0
+gr_xend 1.0
+
+# problem specific physical IC
+sim_shockLoc1 0.1
+sim_shockLoc2 0.9
+sim_densL 1.0
+sim_velxL 0.0 #0.#-2.
+sim_presL 1000.0 #1.0 #0.4
+sim_densM 1.0
+sim_velxM 0.0 #0.#-2.
+sim_presM 0.01 #1.0 #0.4
+sim_densR 1.0 #0.125 #1.0
+sim_velxR 0.0 #0. #2.0
+sim_presR 100.0 #0.1 #0.4
+sim_gamma 1.4
+sim_smallPres 1.e-12
+
+# BC type
+sim_bcType 'outflow'
+
+# IO frequency
+sim_ioTfreq 0.01 #real
+sim_ioNfreq 10    #positive integer; zero or negative if not used
+
+
+
+### Shu-Osher ###
+# Please put your runtime parameters: 
+# name, and a space, followed by values 
+
+# sim variables
+sim_name 'shu128_plm_vl_hllc' # 'sod128_plm_mc_roe2'
+sim_cfl 0.8 
+sim_tmax 1.8 # 0.15 # 0.2
+sim_nStep 100000
+sim_riemann 'hllc' #roe #hll
+sim_limiter 'vanLeer' #mc #vanLeer #minmod
+sim_charLimiting .false.
+sim_order 2
+
+# grid variables
+gr_nx 128
+gr_ngc 2
+gr_xbeg -4.5
+gr_xend 4.5
+
+# problem specific physical IC
+sim_shockLoc -4.0
+sim_ampl 0.2
+sim_freq 5.0
+sim_densL 3.857143
+sim_velxL 2.629369 #0.#-2.
+sim_presL 10.33333 #1.0 #0.4
+sim_densR 1.0 #0.125 #1.0
+sim_velxR 0.0 #0. #2.0
+sim_presR 1.0 #0.1 #0.4
+sim_gamma 1.4
+sim_smallPres 1.e-12
+
+# BC type
+sim_bcType 'user'
+
+# IO frequency
+sim_ioTfreq 0.01 #real
+sim_ioNfreq 10    #positive integer; zero or negative if not used

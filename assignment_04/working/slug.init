@@ -1,0 +1,61 @@
+# Please put your runtime parameters: 
+# name, and a space, followed by values 
+
+# sim variables
+sim_name 'sod_ppm_mm_roe'
+sim_fixDt .false.
+sim_dt 0.01
+sim_cfl 0.8
+sim_tmax 0.15
+sim_nstep 100000
+sim_nlim  .false.
+sim_outputIntervalTime 0.1
+
+
+sim_riemann 'roe'
+sim_limiter 'minmod'
+sim_charLimiting .false.
+sim_order 3
+sim_Torder 2
+sim_RK .false.
+
+
+sim_WENO 'Z'               #'5' or 'Z'
+sim_mval 1		   #ROC power for betas'
+sim_WENeps 1.e-36
+
+# grid variables
+gr_ngc 2
+gr_nx 128
+gr_xbeg 0.
+gr_xend 1.
+
+# problem specific physical IC
+sim_icType 'shock'
+sim_shockLoc 0.5
+sim_densL 1.0
+sim_velxL 0.0
+sim_presL 1.0
+sim_enerL 5.0
+sim_densR 0.125
+sim_velxR 0.0
+sim_presR 0.1
+sim_enerR 5.0
+sim_gamma 1.4
+sim_smallPres 1.e-12
+
+# BC type
+sim_bcType 'outflow'
+
+# IO frequency
+sim_ioTfreq 0.01 #real
+sim_ioNfreq 10    #positive integer; zero or negative if not used
+
+sim_sigma 0.0
+sim_sigdel 15.0
+sim_quad 'exact'
+sim_gp_kernel 'SE'
+sim_matern_nu 5.5
+sim_RQ_alpha 0.1
+gr_radius 3
+
