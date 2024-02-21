@@ -1,0 +1,239 @@
+% !TEX root = /home/computer/ucsc/master-2/quarter-1/computational-fluids/master.tex
+\lecture{2}{Thu 14 Oct 2021 05:13}{Burgers' Equation}
+
+\subsectionfont{\fontsize{10}{10}\selectfont}
+
+\subsection{Linear scalar equations}%
+\paragraph{The advection equation with constant velocity $a$}
+\subparagraph{In non-conservative form}
+\[
+u_{t}+au_{x} = 0
+.\] 
+
+with initial condition
+\[
+  u(x,0) = u_{0}(x)
+.\] 
+
+Considering a parameterization of the solution $u(x,t)$
+ \[
+   u(x(s),t(s))
+.\] 
+
+Taking the derivative of $u$ with respect to $s$ 
+
+\[
+  \diff[]{u}{s} = \diff[]{t}{s}u_{t} + \diff[]{x}{s}u_{x}
+.\] 
+
+Yields the characteristic equations
+\[
+\begin{dcases}
+  \diff[]{t}{s} = 1 \\
+  \diff[]{x}{s} = a \\
+  \diff[]{u}{s} = 0 
+\end{dcases}
+.\] 
+
+with solutions
+\[
+\begin{dcases}
+  t(s) = s + t_0 \\
+  x(s) = as + x_0 \\
+  u(s) = u_0 = u(x_0,t_0) = u(x_{0},0) = u_{0}(x_{0})
+\end{dcases}
+.\] 
+
+since $t_0=0$ then $s=t$ and $x_0 = x - at$, so 
+\[
+  \boxed{u(x,t) = u_0(x-at)}
+.\] 
+
+Where $x-at$ is the characteristic line with a given $x_0$ and propagation
+velocity $a$. So the initial data $u_0(x)$ is advected to the right for $a>0$
+and to the left for $a<0$
+
+\begin{figure}[ht]
+    \centering
+    \incfig{linear-advection}
+    \caption{linear advection}
+    \label{fig:linear-advection}
+\end{figure}
+
+
+\paragraph{The advection equation with variable velocity $a(x(t))$}
+
+\subparagraph{In conservative form}
+\[
+  u_{t}+ \left(a(x(t))\right)_{x} = 0
+.\] 
+
+\subparagraph{In non-conservative form}
+\[
+  u_{t}+a(x(t))u_{x} = -a'(x(t))u
+.\] 
+
+and we can obtain the characteristic equations
+\[
+  \begin{dcases}
+  \diff[]{u(x(t))}{t} = -a'(x(t))u \neq 0\\
+  \diff[]{x(t)}{t} = a(x(t)) + x_0
+  \end{dcases}
+.\] 
+
+so the solution is no longer constant along characteristics. Further, the
+characteristics are no longer straight lines.
+
+\subsection{Domain of Influence}%
+
+\subsection{Range of Influence}%
+
+\subsection{Nonlinear scalar equations}%
+
+\subsection{Greens functions}%
+
+
+\paragraph{In conservative form}
+\[
+  u_{t}+ \left(f(u)\right)_{x} = 0
+.\] 
+
+where $f(u)$ is a nonlinear function of $u$ and is called the flux function.
+There are two types of flux functions
+
+\begin{enumerate}
+  \item $f(u)$ convex - i.e., $f''(u)>0 \forall u$. (of concanve)
+  \item $f(u)$ is non-convex
+\end{enumerate}
+
+
+\paragraph{In non-conservative form}
+\[
+  u_{t} + \diff[]{f(u)}{u}f_{x}(u) = 0
+.\] 
+
+where $\diff[]{f(u)}{u}$ is called the characteristic speed
+
+\subsection{Burgers' Equation}%
+
+Solutions for $t < t_{s}$ and for $t > t_{s}$ $\dots$
+
+\subsection{Weak solutions}%
+
+$\bf{Definition:}$ The function $u(x,t)$ is called a $\emph{weak solution}$ of
+the scalar conservation law $u_{t}+(f(u))_{x} = 0$ if it satisfies the
+following for all test functions $\phi(x,t)\in C_{0}^{1}(\R \times \R^{+})$:
+
+\subsection{Example}%
+Want to solve
+\[
+\begin{dcases}
+  u_{t}+ \left( \frac{u}{2} \right)_{x} = 0 \\
+  u(x,0) = g(x) = 
+    \begin{cases}
+      1, & x < -1 \\
+      -x, & -1 \leq x \leq 0 \\
+      0, & x > 0
+    \end{cases}
+\end{dcases}
+.\] 
+
+\begin{figure}[ht]
+    \centering
+    \incfig{example-initial-condition-for-burgers}
+    \caption{example initial condition for burgers}
+    \label{fig:example-initial-condition-for-burgers}
+\end{figure}
+
+Assuming $u(x,t)$ is smooth. In conservative form
+\[
+  u_{t}+ \left( \frac{u^{2}}{2} \right)_{x} = u_{t}+uu_{x} = 0
+.\] 
+
+Considering the parameterization of the solution $u(x,t)$
+ \[
+   u(x(s),t(s))
+.\] 
+
+and then taking the derivative of $u$ with respect to $s$ 
+\[
+\diff[]{u}{s}=\diff[]{t}{s}u_{t}+\diff[]{x}{s}u_{x}
+.\] 
+
+Yields the characteristic equations
+\[
+\begin{dcases}
+  \diff[]{t}{s} = 1 \\
+  \diff[]{x}{s} = u \\
+  \diff[]{u}{s} = 0
+\end{dcases}
+.\] 
+
+with solutions
+\[
+\begin{dcases}
+  t(s) = s + t_0 \quad t_0 = 0 \\
+  u(s) = u_0 = u(x_0,t_0) = u(x_0,0) = g(x_0) \\
+  \implies x(s) = g(x_0)s + x_0 \\
+\end{dcases}
+.\] 
+
+\begin{figure}[ht]
+    \centering
+    \incfig{characteristic-lines-example1}
+    \caption{characteristic lines example1}
+    \label{fig:characteristic-lines-example1}
+\end{figure}
+
+This line has slope $g(x_0)$. Since the value of the solution depends on the initial data $x_0$, and the characteristic line depends also on the initial data $x_0$, we'll have to break this up into cases.
+
+\textbf{Case 1.} $x_0<-1$ then $g(x_0)=1$ by definition. Hence
+\begin{gather*}
+  x(t) = t+x_0 \\
+  \boxed{u(x(t),t) = 1}
+\end{gather*}
+
+\textbf{Case 2.} $-1\leq x_0\leq 0$ then $g(x_0)=-x_0$ by definition. Hence
+\begin{gather*}
+  x(t) = -x_0t+x_0\\
+  u(x(t),t) = -x_0
+\end{gather*}
+
+Solving for $x_0$ we find $x_0= \frac{x(t)}{1-t}$ and
+\[
+  \boxed{u(x(t),t) = \frac{x(t)}{t-1}}
+.\] 
+
+\textbf{Case 3.} $x_0>0$ then $g(x_0)= 0$ and
+\begin{gather*}
+  x = x_0 \\
+  \boxed{u(x(t),t) = 0}
+\end{gather*}
+
+so the final solution is
+\[
+  \boxed{u(x(t),t) = 
+        \begin{cases}
+            1, & x < t-1 \\
+            - \frac{x(t)}{1-t}, & t-1\leq x\leq 0\\
+            0, & x>0
+        \end{cases}}
+.\] 
+
+for $t<1$ as $t$ approaches $1$ we get a discontinuity
+
+\begin{figure}[ht]
+    \centering
+    \incfig{example1-solution}
+    \caption{example1 solution}
+    \label{fig:example1-solution}
+\end{figure}
+
+Plotting the characteristic lines
+
+\begin{figure}[ht]
+    \centering
+    \incfig{example1-characteristics}
+    \caption{example1 characteristics}
+    \label{fig:example1-characteristics}
+\end{figure}

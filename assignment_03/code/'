@@ -1,0 +1,104 @@
+import numpy as np
+from scipy.sparse import diags
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
+class Transport1D:
+
+    """Docstring for Godunov. """
+
+    def __init__(self, flux, g, tspan, xspan, a = 1.0, cfl = 1.0, N = 64):
+        self.flux = flux
+        self.u0 = g
+        self.tspan = tspan
+        self.xspan = xspan
+        self.a = a
+        self.cfl = cfl
+        self.N = N
+
+        self.dx = (xspan[1] - xspan[0])/N
+        self.dt = (cfl * self.dx)/a 
+        self.M = int((tspan[1]-tspan[0])/self.dt)
+        # self.u0 = loop i = 0:N g(xspan[0] + dx*i)
+        
+        self.u0 = np.zeros((N), dtype = np.double)
+        for i in range(N):
+           self.u0[i] = g(xspan[0] + self.dx*i)
+
+    def godunov(self):
+
+        """TODO: Docstring for function.
+
+        :arg1: TODO
+        :returns: TODO
+
+        """
+        print("CFD.godunov")
+
+    def lax_f(self):
+        """TODO: Docstring for lax_f.
+        :returns: TODO
+
+        """
+        dt = self.dt; dx = self.dx; N = self.N; M = self.M; a = self.a
+
+        uL = [1.0/2.0 + a*dt/(2.0*dx)]
+        uR = [1.0/2.0 - a*dt/(2.0*dx)]
+        diagonals = [[1/2 - a*dt/(2.0*dx) for _ in range(N-1)], [1/2 + a*dt/(2.0*dx) for _ in range(N-1)], uL, uR] 
+        # boundary 
+        L = diags(diagonals, [1, -1, N-1, -(N-1)], dtype = np.double)
+        # ! # boundary condition
+
+        self.u = np.zeros((N,M), dtype = np.double)
+        self.u[:, 0] = self.u0
+
+        for i in range(M-1):
+            self.u[:,i+1] = L @ self.u[:,i]
+        return self.u
+        
+    def plot_(self, u):
+        """TODO: Docstring for print.
+
+        :arg1: TODO
+        :returns: TODO
+
+        """
+        x0 = self.xspan[0]; x = self.xspan[1]; N = self.N
+        xs = np.linspace(x0, x, N)
+        # plot initial condition
+        plt.plot(xs, self.u0)
+        plt.show()
+
+        # data which the line will
+        # contain (x, y)
+    def init(self):
+        self.line.set_data([], [])
+        return self.line,
+
+    def update(self, i):
+        x0 = self.xspan[0]; x = self.xspan[1]; N = self.N
+        xs = np.linspace(x0, x, N)
+
+        # plots a sine graph
+        # y = np.sin(2 * np.pi * (x - 0.01 * i))
+        y = self.u[:, i]
+        self.line.set_data(xs, y)
+
+        return self.line,
+
+    def animate(self, u):
+        # which the graph will be plotted
+        plt.close('all')
+        fig = plt.figure()
+
+        # marking the x-axis and y-axis
+        axis = plt.axes(xlim =(0, 1), ylim =(-2, 2))
+
+        # initializing a line variable
+        self.line, = axis.plot([], [], lw = 3)
+
+        anim = FuncAnimation(fig, self.update, init_func = self.init, \
+                frames = 20, interval = 2, blit = True)
+
+
+        anim.save('anim.mp4', writer = 'ffmpeg', fps = 2)

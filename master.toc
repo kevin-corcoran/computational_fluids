@@ -1,0 +1,12 @@
+\contentsline {section}{1: Assignment 1}{1}{section*.1}%
+\contentsline {subsection}{\numberline {0.1}Problem 1}{1}{subsection.0.1}%
+\contentsline {subsection}{\numberline {0.2}Problem 2}{1}{subsection.0.2}%
+\contentsline {subsection}{\numberline {0.3}Problem 3}{3}{subsection.0.3}%
+\contentsline {section}{Lecture 1: Mass Conservation}{3}{figure.caption.3}%
+\contentsline {section}{\numberline {1}Substational Derivative}{4}{section.1}%
+\contentsline {section}{\numberline {2}Mass Conservation - continuity equation}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Finite Control Volume (FCV) $V$ fixed in space with fluid moving through it}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Finite Control Volume $V$ moving with the fluid}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Infinitesimal Fluid Element (IFE) $dV$ fixed in space with fluid moving through it}{6}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Infinitesimal Fluid Element $dV$ moving along a streamline}{6}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Bringing everything together}{7}{section.3}%

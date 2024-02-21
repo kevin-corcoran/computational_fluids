@@ -1,0 +1,109 @@
+% !TEX root = /home/computer/ucsc/master-2/quarter-1/computational-fluids/master.tex
+\lecture{3}{Thu 04 Nov 2021 09:31}{Euler Equation}
+
+\subsectionfont{\fontsize{10}{10}\selectfont}
+
+\section{Euler Equation}%
+
+Conservation of momentum (Force (net) $=$ rate of change of momentum of
+lagrangian volume changing with time)
+\begin{equation}
+  \frac{D \vec{u}}{Dt} = - \frac{1}{ \rho}\vec{\nabla}p + g 
+\end{equation}
+
+Using substantial derivative
+\begin{equation}
+  \underbrace{\diffp[]{\vec{u}}{t}}_\text{eul acc at
+    a pnt} + \underbrace{( \vec{u}\cdot \vec{\nabla}
+    ) \vec{u}}_\text{advection lag acc} = \underbrace{
+  \underbrace{-\frac{1}{\rho}\vec{\nabla}p}_\text{stresses press grad} + \underbrace{g}_\text{body/grav/boyncy}}_\text{driving forces}
+\end{equation}
+
+
+\section{One-dimensional time-dependent Euler Equation}%
+\subsection{Euler equation in compact conservative form. }%
+
+\begin{align}
+  U_{t} + \nabla\cdot F(U) &= 0 \\
+  U_{t} + F(U)_{x} &= 0 \qquad\qquad\quad\nabla = \frac{\partial}{\partial x}\\
+  U_{t} + A(U)U_{x} &= 0
+\end{align}
+
+where $A(U) = \frac{\partial{F(U)}}{\partial{U}}$ is the flux Jacobian matrix.
+Goal diagonalize $A(U) = R\Lambda R^{-1}$, then the Euler Equations, for $W := R^{-1}U$, can be
+written as,
+
+\begin{align}
+  R^{-1}U_{t} + \Lambda R^{-1}U_{x} &= 0 \\
+  W_{t} + \Lambda W_{x} &= 0 \\
+  \diffp[]{w_{k}}{t} + \lambda_{k} \diffp[]{w_{k}}{x} &= 0, \qquad k=1,2,\dots,m
+\end{align}
+
+and becomes completely decoupled family of individual scalar equations with solution $\boxed{U = RW}$
+
+\subsection{The Conservative-Variable Form of Euler Equations}%
+
+\begin{equation}
+  U = \begin{pmatrix}
+    \rho \\ \rho u \\ E
+  \end{pmatrix}
+\end{equation}
+
+where $E$ is total energy per unit volume,
+
+\[
+E = \rho \left( \frac{u^{2}}{2} + e \right)
+.\] 
+
+and $e$ is the specific internal energy given by caloric Equation of State
+(EoS)
+
+\[
+e = e( \rho, P)
+.\] 
+
+For ideal gases
+
+\[
+  e = \frac{p}{ ( \gamma - 1) \rho}
+.\] 
+
+\subparagraph{The vector of conservative fluxes is given by}%
+
+\[
+  F(U) = \begin{pmatrix}
+    \rho u \\ \rho u^{2} + p \\ u(E+p)
+  \end{pmatrix}
+.\] 
+
+\paragraph{Diagonalization given on page $130$}%
+\[
+  L^{c}A(U)R^{c} = \Lambda
+.\] 
+
+
+\subsection{The Primitive-Variable Form of the Euler Equations}%
+
+\begin{equation}
+  V = \begin{pmatrix}
+    \rho \\ u \\ p
+  \end{pmatrix}
+\end{equation}
+
+\paragraph{Diagonalization given on page $131$}%
+\[
+  L^{p}A(V)L^{p} = \Lambda
+.\] 
+
+\paragraph{Note}%
+$A(V)$ and  $A(U)$ are similar, for $Q = \diff[]{U}{V}$ and $Q^{-1}
+= \diff[]{V}{U}$,
+
+\[
+  A(V) = Q^{-1}A(U)Q
+.\] 
+
+and hence have the same eigenvalues.
+
+
+

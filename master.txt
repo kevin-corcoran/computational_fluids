@@ -1,0 +1,90 @@
+Computational Fluid Dynamics
+Kevin Corcoran
+
+October 5, 2021
+
+Contents
+
+Lecture 1: Mass Conservation
+
+1
+
+1 Substational Derivative
+
+1
+
+2 Mass Conservation - continuity equation
+
+2
+
+2.1 Finite Control Volume (FCV) V xed in space with uid moving
+through it . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.2 Finite Control Volume V moving with the uid . . . . . . . . . .
+2.3 Innitesimal Fluid Element (IFE) dV xed in space with uid
+moving through it . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.4 Innitesimal Fluid Element dV moving along a streamline . . . .
+
+3 Bringing everything together
+
+2
+3
+4
+4
+
+5
+
+Lecture 1: Mass Conservation
+1
+
+Substational Derivative
+
+Let ~u = ~u(x, y, z, t) =< u(x, y, z, t), v(x, y, z, t), w(x, y, z, t) >. Then the total
+derivative
+d~u =
+
+∂~u
+∂~u
+∂~u
+∂~u
+dx +
+dy +
+dz +
+dt.
+∂x
+∂y
+∂z
+∂t
+
+d~u
+∂~u dx ∂~u dy ∂~u dz
+∂~u
+=
++
++
++
+dt
+∂x dt
+∂y dt
+∂z dt
+∂t
+∂~u
+∂~u
+∂~u
+∂~u
+=
+u+
+v+
+w+
+∂x
+∂y
+∂z
+∂t
+
+Lagrangian view of a uid element (substantial derivative) measures the time
+rate of change of a given quantity (uid velocity in this case) as it moves from
+
+1
+
+Mon 04 Oct 2021 11:32
+
+

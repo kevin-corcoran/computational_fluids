@@ -1,0 +1,165 @@
+% !TEX root = /home/computer/ucsc/master-2/quarter-1/computational-fluids/master.tex
+\lecture{1}{Mon 04 Oct 2021 11:32}{Mass Conservation}
+\subsectionfont{\fontsize{10}{10}\selectfont}
+
+\section{Substational Derivative}%
+
+Let $\vec{u} = \vec{u}(x,y,z,t) = <u(x,y,z,t), v(x,y,z,t), w(x,y,z,t)>$. Then the total derivative
+
+\[
+  d\vec{u} = \diffp[]{\vec{u}}{x}dx + \diffp[]{\vec{u}}{y}dy
+  + \diffp[]{\vec{u}}{z}dz + \diffp[]{\vec{u}}{t}dt
+.\] 
+
+\begin{figure}[ht]
+    \centering
+    \incfig{total-derivative}
+    \caption{Total derivative}
+    \label{fig:total-derivative}
+\end{figure}
+
+
+\begin{align*}
+  \diff[]{\vec{u}}{t} &= \diffp[]{\vec{u}}{x}\diff[]{x}{t}
+  + \diffp[]{\vec{u}}{y}\diff[]{y}{t} + \diffp[]{\vec{u}}{z}\diff[]{z}{t}
+  + \diffp[]{\vec{u}}{t} \\
+                      &= \diffp[]{\vec{u}}{x}u + \diffp[]{\vec{u}}{y}v
+  + \diffp[]{\vec{u}}{z}w + \diffp[]{\vec{u}}{t}
+\end{align*}
+
+Lagrangian view of a fluid element (substantial derivative) measures the time
+rate of change of a given quantity (fluid velocity in this case) as it
+moves from one location to another in both space and time.
+\[
+  \boxed{\frac{D \vec{u}}{Dt} :=
+    \underbrace{(\vec{u}\cdot\nabla)\vec{u}}_\text{advection term}
+  + \underbrace{\diffp[]{\vec{u}}{t}}_\text{Eulerian view}}
+.\] 
+
+As an operator,
+\begin{equation} \label{eq:SD}
+  \boxed{\frac{D}{Dt} = \frac{\partial}{\partial t} + (\vec{u}\cdot\nabla)}
+\end{equation}
+
+
+\section{Mass Conservation - continuity equation}%
+\subsection{Finite Control Volume (FCV) $V$ fixed in space with fluid moving through
+it}%
+
+\begin{figure}[ht]
+    \centering
+    \incfig{fcv-fixed-in-space}
+    \caption{FCV fixed in space}
+    \label{fig:fcv-fixed-in-space}
+\end{figure}
+
+Total mass in volume
+\[
+  \textcolor{teal}{M_{v}} = \int_{V} { \rho} \: d{V}
+.\] 
+
+mass flux through volume
+\[
+  \int_{S} { \rho \vec{u} \cdot \hat{n}} {}  \: {dS} {}
+.\]
+
+By conservation, change in mass in volume equals mass flux out
+\begin{align*}
+  \frac{\partial M_{v}}{\partial t} &= - \int_{S} { \rho \vec{u} \cdot \hat{n}} {}  \: {dS} {} \\
+  \frac{\partial }{\partial t} \int_{V} { \rho} \: d{V} &= - \int_{S} { \rho \vec{u} \cdot \hat{n}} {}  \: {dS} {} \\
+\end{align*}
+
+This results in the conservative form of the continuity equation in integral
+form.
+\begin{equation} \label{eq:F1}
+  \boxed{\frac{\partial}{\partial t} \int_{V} { \rho} \: d{V} + \int_{S} { \rho \vec{u} \cdot \hat{n}} {}  \: {dS} {} = 0} \\
+\end{equation}
+
+
+\subsection{Finite Control Volume $V$ moving with the fluid}%
+
+\begin{figure}[ht]
+    \centering
+    \incfig{fcv-moving-with-the-fluid}
+    \caption{FCV moving with the fluid}
+    \label{fig:fcv-moving-with-the-fluid}
+\end{figure}
+
+Taking the substantial derivative of the mass $M_{v}$ of a moving control
+volume. The change in mass of this control volume is zero as it moves
+with the fluid.
+\begin{equation} \label{eq:F2}
+  \frac{DM_{v}}{Dt} = \boxed{\frac{D}{Dt}\int_{V} { \rho} \: d{V} = 0}
+\end{equation}
+
+This is the non conservative form of the continuity equation in integral form.
+
+\subsection{Infinitesimal Fluid Element (IFE) $dV$ fixed in space with fluid moving
+through it}%
+
+\begin{figure}[ht]
+    \centering
+    \incfig{ife-fixed-in-space}
+    \caption{IFE fixed in space}
+    \label{fig:ife-fixed-in-space}
+\end{figure}
+
+Conservative form in differential form.
+
+\subsection{Infinitesimal Fluid Element $dV$ moving along a streamline}%
+Non conservative form in differential form.
+
+\begin{figure}[ht]
+    \centering
+    \incfig{ife-moving-along-streamline}
+    \caption{IFE moving along streamline}
+    \label{fig:ife-moving-along-streamline}
+\end{figure}
+
+
+\section{Bringing everything together}%
+
+From equation \ref{eq:F1}, if we assume the volume doesn't change in time, 
+we can bring the derivative inside the integral
+\[
+   \int_{V} { \frac{\partial\rho}{\partial t}} \: d{V} + \int_{S} { \rho \vec{u} \cdot \hat{n}} {}  \: {dS} {} = 0 \\
+.\] 
+
+Then, applying the divergence theorem, we can write the surface integral as
+a volume integral and combine terms
+
+\begin{align*}
+  \int_{V} { \frac{\partial\rho}{\partial t}} \: d{V} + \int_{V} { \nabla\cdot\rho \vec{u}
+  } \: {dV} &= 0 \\
+\end{align*}
+
+We get an alternative form of FCV fixed in space (F1)
+
+\begin{equation}
+  \boxed{\int_{V} { \frac{\partial\rho}{\partial t} +  \nabla\cdot\rho \vec{u}}
+  \: d{V} = 0}
+\end{equation}
+
+Since this is an arbitrary volume, this implies IFE fixed in space (F3)
+
+\begin{equation}
+  \boxed{ \frac{\partial\rho}{\partial t} +  \nabla\cdot\rho \vec{u} = 0}
+\end{equation}
+
+Then applying the vector identity $\nabla\cdot\rho \vec{u} = \vec{u}\cdot\nabla \rho + \rho\nabla\cdot \vec{u}$
+\[
+  \int_{V} { \frac{\partial\rho}{\partial t} + \vec{u}\cdot\nabla \rho + \rho\nabla\cdot \vec{u}} \: d{V} = 0
+.\] 
+
+Noting the use of the substantial derivative, we get FCV moving in space (F2)
+
+\begin{equation}
+  \boxed{\int_{V}{\frac{D \rho}{Dt} + \rho\nabla\cdot \vec{u}} \: d{V} = 0}
+\end{equation}
+
+Since this is an arbitrary volume, we get IFE moving in space (F4)
+\begin{equation}
+  \boxed{\frac{D \rho}{Dt} + \rho\nabla\cdot \vec{u} = 0}
+\end{equation}
+
+So (F1) $\implies$ (F3) and (F1) $\implies$ (F2) $\implies$ (F4)
